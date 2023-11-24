@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" >
+</head>
+<body>
+<h1>Hello! <br>
+  Looking for a book? <br>
+  Selling your books? <br>
+  You are in the right place.<br>
+  Start with <a href="#signup">registration</a> or just login<a href="/login">here</a>
+</h1>
+
+<form name="signup-form" id="signup" action="#" th:action="@{/createUser}" method="post" th:object="${user}">
+    <div class="row-group">
+<!--        <div>-->
+<!--            <input type="text" th:field="${user.getFirstName()}" placeholder="First Name">-->
+<!--            <input type="text" th:field="${user.getLastName()}" placeholder="Last Name">-->
+<!--            <input type="date" th:field="${user.getDob()}">-->
+<!--            <input type="email" th:field="${user.getEmail()}" placeholder="Email">-->
+<!--            <input type="password" th:field="${user.getPassword()}" placeholder="Password">-->
+<!--        </div>-->
+        <div>
+            <input type="text" th:field="*{firstName}" placeholder="First Name">
+            <span th:errors="*{firstName}"></span>
+            <input type="text" th:field="*{lastName}" placeholder="Last Name">
+            <span th:errors="*{lastName}"></span>
+            <input type="date" th:field="*{dob}">
+            <span th:errors="*{dob}"></span>
+            <input type="email" th:field="*{email}" placeholder="Email">
+            <span th:errors="*{email}"></span>
+            <input type="password" th:field="*{password}" placeholder="Password">
+            <span th:errors="*{password}"></span>
+        </div>
+        <button type="submit">Create user</button>
+    </div>
+
+    <div>
+        <p th:text="${message_signup}"/>
+      <span th:if="${message_signup == 'signup_failed'}">
+        <label th:if="${error}" th:text="${error}"></label>
+          Registration failed.
+      </span></p>
+        <p>
+        <span th:if="${message_signup == 'signup_success'}">
+            Registration successful. Now you can login.
+        </span></p>
+
+
+    </div>
+
+</form>
+
+</body>
+</html>

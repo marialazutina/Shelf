@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+</head>
+<body>
+<form name="login-form" id="login" action="#" th:action="@{/login}" method="post">
+  <h2>Login</h2>
+  <div class="login-form">
+    <label for="login-email">Email:</label>
+    <input id="login-email" name="login-email" type="email" required>
+    <label for="login-pass">Password:</label>
+    <input id="login-pass" name="login-pass" type="password">
+  </div>
+  <button type="submit">Log in</button>
+
+  <div>
+    <p th:text="${message_login}">
+      <span th:if="${message_login == 'login_failed'}">Failed</span>
+    </p>
+  </div>
+
+</form>
+
+</body>
+</html>
