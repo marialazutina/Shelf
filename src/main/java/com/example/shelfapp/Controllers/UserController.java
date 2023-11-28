@@ -67,10 +67,10 @@ public class UserController {
     public String handleUserLogin(User user, HttpServletResponse response, Model model){
         try{
             User loggedInUser = userService.verifyUser(user);
-            Cookie cookie = new Cookie("userCookie", loggedInUser.getId().toString());
-            response.addCookie(cookie);
+            Cookie userCookie = new Cookie("userCookie", loggedInUser.getId().toString());
+            response.addCookie(userCookie);
 
-            return "redirect:userPageAfterLogin/" + loggedInUser.getId();
+            return "redirect:userPage/" + loggedInUser.getId();
         }catch (Exception e){
             System.out.println(e);
             model.addAttribute("message_login", "login_failed");
@@ -78,9 +78,13 @@ public class UserController {
         }
     }
     @GetMapping("userPage/{userId}")
-    public String showUserPage(@PathVariable Long userId, Model model, User user){
+    public String showUserPage(@PathVariable("userId") Long userId, Model model, User user){
         model.addAttribute("userId", userId);
         model.addAttribute("user", user);
-        return "userPageAfterLogin";
+
+        String firstName = userService.findUserById(userId).getFirstName();
+        model.addAttribute("firstName", firstName);
+
+        return "userPage";
     }
 }

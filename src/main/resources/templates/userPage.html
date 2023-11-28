@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Shelf</title>
+</head>
+<body>
+<h2>Nice to see you again, <span th:text="${firstName}"></span>!</h2>
+
+
+<div>
+    <a th:href="@{/userPage/{id}/addBook (id=${userId})}">Add book for sale</a>
+    <a href="showMyListing">My listing</a>
+    <a href="myProfile">My profile</a>
+    <a href="logout">Logout</a>
+</div>
+<div>
+    <a href="seeAllBooks">Books</a>
+</div>
+</body>
+</html>

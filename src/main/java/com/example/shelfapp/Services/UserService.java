@@ -1,5 +1,6 @@
 package com.example.shelfapp.Services;
 
+import com.example.shelfapp.Models.Book;
 import com.example.shelfapp.Models.User;
 import com.example.shelfapp.Repositories.UserRepository;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,8 @@ public class UserService {
     public User findUserByEmail(String email){
         return this.userRepository.findUserByEmail(email);
     }
-    public User getById(Long id){
-        return userRepository.getReferenceById(id);
+    public User findUserById(Long id){
+        return this.userRepository.findById(id).orElseThrow();
     }
 
     public User verifyUser(User userLoginRequest) throws Exception{
@@ -41,4 +42,7 @@ public class UserService {
     List<User> getAllUsers(){
         return userRepository.findAll();
     }
+
+
+
 }

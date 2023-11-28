@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Book</title>
+</head>
+<body>
+<h3>Add book</h3>
+
+<form th:action="${'/userPage/' + userId + '/addBook'}" method="post">
+    <label for="title">Title</label>
+    <input id="title" name="title" type="text" required />
+    <label for="author">Author</label>
+    <input id="author" name="author" type="text" required />
+    <label for="genre">Genre</label>
+    <select id="genre" name="genre">
+        <option th:each="genres:
+        ${T(com.example.shelfapp.Models.Genre).values()}"
+                th:value="${genres}"
+                th:text="${genres.description}"></option>
+    </select>
+    <label for="price">Price</label>
+    <input id="price" name="price" type="number" placeholder="EUR" required/>
+
+    <button type="submit">Add</button>
+
+
+
+</form>
+
+</body>
+</html>
