@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
@@ -14,6 +15,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,10 +26,20 @@ public class User {
     private Date dob;
     @Column(unique = true)
     private String email;
+    @Column(nullable = false)
     private String password;
-    @Column(columnDefinition = "boolean default true")
-    private boolean active;
+    private Role role;
+    private Boolean enabled = false;
+    private Boolean locked = false;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Book> myBookList;
+
+    public User(String firstName, String lastName, String email, String password, Role role){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
 
 }

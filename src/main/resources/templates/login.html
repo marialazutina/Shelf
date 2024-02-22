@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Login Page</title>
@@ -15,9 +15,8 @@
   </div>
   <button type="submit">Log in</button>
 
-  <div>
-    <p th:text="${message_login}">
-      <span th:if="${message_login == 'login_failed'}">Failed</span>
+  <div th:if="${param.error != null}" class="alert alert-danger">
+    <p th:text="${message_signup}">
     </p>
   </div>
 

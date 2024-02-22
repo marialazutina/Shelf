@@ -23,8 +23,21 @@
             Start with <a href="#signup">registration</a>
         </h3>
 
-        <form class="form" name="signup-form" id="signup" action="#" th:action="@{/createUser}" method="post" th:object="${user}">
+        <form class="form" name="signup-form" id="signup" action="#" th:action="@{/registration}" method="post" th:object="${user}">
             <h2>Registration form</h2>
+            <div class="message">
+                <p th:text="${message_failed}">
+                    <span th:if="${message_failed == 'Sign up failed.'}">
+                        <label th:if="${error}" th:text="${error}"></label>
+                    </span>
+                </p>
+                <p th:text="${message_signup}">
+                    <span th:if="${message_signup == 'Registration successful!'}">
+                        Registration successful. Now you can login.
+                    </span>
+                </p>
+            </div>
+
             <div>
                 <input type="text" th:field="*{firstName}" placeholder="First Name">
                 <span th:errors="*{firstName}"></span>
@@ -48,22 +61,6 @@
             <div class="button">
                 <button type="submit">Create user</button>
             </div>
-
-            <div class="message">
-                <p th:text="${message_signup}">
-                    <span th:if="${message_signup == 'signup_failed'}">
-                        <label th:if="${error}" th:text="${error}"></label>
-                        Registration failed.
-                    </span>
-                </p>
-                <p>
-                    <span th:if="${message_signup == 'signup_success'}">
-                        Registration successful. Now you can login.
-                    </span>
-                </p>
-
-            </div>
-
         </form>
 
     </div>
@@ -75,7 +72,7 @@
 
 <div id="support">
     <p>Support</p>
-    <p>Instruction hot to use app</p>
+    <p>Instruction how to use app</p>
 </div>
 
 </body>
