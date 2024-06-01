@@ -2,13 +2,10 @@ package com.example.shelfapp.Controllers;
 
 import com.example.shelfapp.Models.User;
 import com.example.shelfapp.Services.UserService;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class UserController {
@@ -18,14 +15,13 @@ public class UserController {
         this.userService = userService;
     }
 
-
     @GetMapping("/")
     public String createUserForm(Model model){
         model.addAttribute("user", new User());
         return "index";
     }
-
-//    @PostMapping("/registrationr")
+//
+//    @PostMapping("/registration")
 //    public String createUser(@ModelAttribute("user") User user, BindingResult result, Model model){
 //
 //        try {
@@ -40,9 +36,6 @@ public class UserController {
 //            }
 //            userService.saveUser(user);
 //            model.addAttribute("message_signup", "Registration successful!");
-//
-//
-//
 //            System.out.println("User has been created. Full name: " + user.getFirstName() + " " + user.getLastName());
 //        }catch (Exception e){
 //            model.addAttribute("message_failed", "Registration failed");
@@ -51,11 +44,9 @@ public class UserController {
 //
 //            return "index";
 //        }
-//
-//
 //        return "redirect:/?message_signup=signup_success";
 //    }
-//
+
 //    @GetMapping("/login")
 //    public String adminLoginForm(
 //            @RequestParam(name = "message_signup", required = false) String message,
@@ -84,7 +75,7 @@ public class UserController {
 //        model.addAttribute("userId", userId);
 //        model.addAttribute("user", user);
 //
-//        String firstName = userService.findUserById(userId).getFirstName();
+//        String firstName = userService.findUserById(userId).get().getFirstName();
 //        model.addAttribute("firstName", firstName);
 //
 //        return "userPage";

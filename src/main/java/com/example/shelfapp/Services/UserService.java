@@ -1,6 +1,5 @@
 package com.example.shelfapp.Services;
 
-import com.example.shelfapp.Models.Book;
 import com.example.shelfapp.Models.User;
 import com.example.shelfapp.Registration.Token.ConfirmationToken;
 import com.example.shelfapp.Registration.Token.ConfirmationTokenService;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -40,6 +40,17 @@ public class UserService implements UserDetailsService {
         return userRepository.findAll();
     }
 
+    public User findUserByEmail(String email){
+        return userRepository.findUserByEmail(email);
+    }
+
+    public Optional<User> findUserById(Long id){
+        return userRepository.findById(id);
+    }
+
+    public void saveUser(User user){
+        userRepository.save(user);
+    }
 
     @Override
     public UserDetails loadUserByUsername(String email)

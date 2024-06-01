@@ -1,7 +1,7 @@
 package com.example.shelfapp.Registration;
 
 import com.example.shelfapp.Email.EmailSender;
-import com.example.shelfapp.Models.CustomUserDetails;
+import com.example.shelfapp.Models.Role;
 import com.example.shelfapp.Models.User;
 import com.example.shelfapp.Registration.Token.ConfirmationToken;
 import com.example.shelfapp.Registration.Token.ConfirmationTokenService;
@@ -19,24 +19,24 @@ public class RegistrationService {
     private final EmailValidator emailValidator;
     private final EmailSender emailSender;
     private final ConfirmationTokenService confirmationTokenService;
-    public String register(CustomUserDetails customUserDetails){
-        boolean isValidEmail = emailValidator.test(customUserDetails.getEmail());
+    public String register(RegistrationRequest request){
+        boolean isValidEmail = emailValidator.test(request.getEmail());
 
         if(!isValidEmail){
             throw new IllegalStateException("Email is not valid");
         }
         String token =  userService.signUpUser(
                 new User(
-                        customUserDetails.getFirstName(),
-                        customUserDetails.getLastName(),
-                        customUserDetails.getEmail(),
-                        customUserDetails.getPassword(),
-                        customUserDetails.getRole()
+                        request.getFirstName(),
+                        request.getLastName(),
+                        request.getEmail(),
+                        request.getPassword(),
+                        Role.USER
                 )
         );
 
-        String link = "http://localhost:8090/registration/confirm?token=" + token;
-        emailSender.send(customUserDetails.getEmail(), buildEmail(customUserDetails.getFirstName(), link));
+        String link = "http://localhost:8088/registration/confirm?token=" + token;
+        emailSender.send(request.getEmail(), buildEmail(request.getFirstName(), link));
 
         return token;
     }
@@ -129,5 +129,4 @@ public class RegistrationService {
                 "\n" +
                 "</div></div>";
     }
-
 }
